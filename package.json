@@ -1,0 +1,15 @@
+{
+  "name": "map",
+  "author": "Andrey Kudinov",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "sass": "^1.49.9",
+    "vite": "^2.8.0"
+  }
+}
