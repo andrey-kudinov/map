@@ -35,6 +35,8 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   min-height: 100vh;
   background-color: #242121;
   font-family: 'Roboto', sans-serif;
@@ -44,10 +46,14 @@ textarea {
   font-family: 'Roboto', sans-serif;
 }
 
-main {
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
+.inputs {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+
+  > *:not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
 }
 
 .sr-only {
@@ -60,20 +66,6 @@ main {
   border: 0;
 }
 
-.button {
-  min-width: 120px;
-  padding: .5rem 1rem;
-  text-align: center;
-  color: #fff;
-  border-radius: 5px;
-  background-color: #2fa0f6;
-  appearance: none;
-}
-
-input {
-  z-index: 1;
-}
-
 td {
   position: relative;
   width: 2rem;
@@ -82,42 +74,14 @@ td {
   background: blue;
 }
 
-td input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
+.power_5 {
+  background: red;
 }
 
-td input + label::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 1rem;
-  height: 1rem;
-  content: '';
+.power_3 {
+  background: orange;
 }
 
-td input + label::after {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 0;
-  height: 0;
-  content: '';
-  transition: .3s ease;
-}
-
-td input:checked + label::after {
-  background: tomato;
-  width: 100%;
-  height: 100%;
-}
-
-.cell:nth-child(2) {
-  padding-left: 10.5rem;
+.power_1 {
+  background: green;
 }
