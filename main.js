@@ -9,7 +9,7 @@ const createTable = (countRows, countColumns, coordinates, power) => {
   const table = document.querySelector('table')
   table.innerHTML = ''
 
-  const defaultColors = ['green', 'yellow', 'orange', 'red', 'darkred']
+  const defaultColors = ['#49b600', '#c7dd00', 'yellow', '#ffd900', 'orange', '#d65600', '#df0000', 'darkred']
   const count = power - defaultColors.length
   const newColors = count > 0 ? new Array(count).fill(null).map(c => (c = getRandomColor())) : []
   const colors = ['', ...newColors, ...defaultColors]
