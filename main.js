@@ -1,29 +1,28 @@
 import './styles/reset.css'
 import './styles/style.scss'
 
-const maxRowsOrColumns = 50
-const maxPower = 30
+const rows = 30
+const columns = 30
+const size = 2
+const defaultColors = ['#49b600', '#c7dd00', 'yellow', '#ffd900', 'orange', '#d65600', '#df0000', 'darkred']
 
-const createTable = (countRows, countColumns, coordinates, power) => {
+const createTable = ({ rows, columns, coordinates, power, colors }) => {
   const { horizontal, vertical } = coordinates
   const table = document.querySelector('table')
   table.innerHTML = ''
 
-  const defaultColors = ['#49b600', '#c7dd00', 'yellow', '#ffd900', 'orange', '#d65600', '#df0000', 'darkred']
-  const count = power - defaultColors.length
-  const newColors = count > 0 ? new Array(count).fill(null).map(c => (c = getRandomColor())) : []
-  const colors = ['', ...newColors, ...defaultColors]
-
   let currentRow = 0
 
-  while (currentRow < countRows) {
-    const row = new Array(countColumns).fill(0).map((cell, index) => {
-      return `
-        <td style="background: ${getColor({ currentColumn: index, currentRow, horizontal, vertical, power, colors })}">
-          &nbsp;
+  while (currentRow < rows) {
+    const row = new Array(columns).fill(0).map((cell, index) => (
+      `
+        <td
+          style="width: ${size}rem; height: ${size}rem"
+          data-center=${currentRow === horizontal && index === vertical}
+        >
         </td>
       `
-    })
+    ))
 
     currentRow++
 
@@ -31,6 +30,14 @@ const createTable = (countRows, countColumns, coordinates, power) => {
     rowHTML.innerHTML = Array.from(row).join('')
     table.append(rowHTML)
   }
+
+  createCircles(colors, power)
+}
+
+const createColors = (defaultColors, power) => {
+  const count = power - defaultColors.length
+  const newColors = count > 0 ? new Array(count).fill(null).map(c => (c = getRandomColor())) : []
+  return ['', ...newColors, ...defaultColors]
 }
 
 const getRandomColor = () => `#${Math.floor(Math.random() * 16777215).toString(16)}`
@@ -60,45 +67,39 @@ const getColor = ({ currentColumn, currentRow, horizontal, vertical, power, colo
   return color
 }
 
-const handleApply = () => {
-  const button = document.querySelector('button')
+const createCircles = (colors, power) => {
+  let currentCircle = 0
+  const centerCell = document.querySelector('[data-center="true"]')
 
-  button.addEventListener('click', () => {
-    const countRowsElement = document.querySelector('.rows')
-    const countColumnsElement = document.querySelector('.columns')
-    const selectedRowElement = document.querySelector('.row')
-    const selectedColumnElement = document.querySelector('.column')
-    const power = document.querySelector('.power')
+  while (currentCircle <= power) {
+    const circle = document.createElement('div')
+    circle.classList.add('circle')
+    const dimension = `${size + 2 * size * currentCircle}rem`
+    circle.style.width = dimension
+    circle.style.height = dimension
+    circle.style.background = colors[colors.length - 1 - currentCircle]
+    circle.style.zIndex = colors.length - currentCircle + 1
 
-    const selectedRow = +selectedRowElement.value.replace(/\D+/g, '')
-    const selectedColumn = +selectedColumnElement.value.replace(/\D+/g, '')
-    const countRows = +countRowsElement.value.replace(/\D+/g, '')
-    const countColumns = +countColumnsElement.value.replace(/\D+/g, '')
-    const powerValue = +power.value.replace(/\D+/g, '')
+    centerCell.append(circle)
 
-    if (
-      !countRows ||
-      !countColumns ||
-      countRows > maxRowsOrColumns ||
-      countColumns > maxRowsOrColumns ||
-      !selectedRow ||
-      !selectedColumn ||
-      !powerValue ||
-      powerValue > maxPower
-    ) {
-      return
-    }
+    currentCircle++
+  }
+}
 
-    createTable(countRows, countColumns, { vertical: selectedColumn - 1, horizontal: selectedRow - 1 }, powerValue)
+const generateRandomInteger = max => Math.floor(Math.random() * max) + 1
 
-    countRowsElement.value = ''
-    countColumnsElement.value = ''
-    selectedRowElement.value = ''
-    selectedColumnElement.value = ''
-    power.value = ''
+const init = () => {
+  const power = generateRandomInteger(15)
+  const colors = createColors(defaultColors, power)
+  createTable({
+    rows,
+    columns,
+    power,
+    colors,
+    coordinates: { horizontal: generateRandomInteger(columns) - 1, vertical: generateRandomInteger(rows) - 1 },
   })
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-  handleApply()
+  setInterval(init, 500)
 })
