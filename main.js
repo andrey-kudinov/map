@@ -5,6 +5,7 @@ const rows = 30
 const columns = 30
 const size = 2
 const defaultColors = ['#49b600', '#c7dd00', 'yellow', '#ffd900', 'orange', '#d65600', '#df0000', 'darkred']
+const maxPower = 15
 
 const createTable = ({ rows, columns, coordinates, power, colors }) => {
   const { horizontal, vertical } = coordinates
@@ -89,7 +90,7 @@ const createCircles = (colors, power) => {
 const generateRandomInteger = max => Math.floor(Math.random() * max) + 1
 
 const init = () => {
-  const power = generateRandomInteger(15)
+  const power = generateRandomInteger(maxPower)
   const colors = createColors(defaultColors, power)
   createTable({
     rows,
@@ -100,6 +101,4 @@ const init = () => {
   })
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  setInterval(init, 500)
-})
+window.addEventListener('DOMContentLoaded', () => setInterval(init, 500))
