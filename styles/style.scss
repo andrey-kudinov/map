@@ -19,20 +19,19 @@ body {
   background-color: #242121;
 }
 
-.inputs {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 2rem;
-
-  > *:not(:last-child) {
-    margin-bottom: 0.5rem;
-  }
+table {
+  overflow: hidden;
 }
 
 td {
   position: relative;
-  width: 2rem;
-  height: 2rem;
-  border: 1px solid white;
   background: blue;
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
 }
