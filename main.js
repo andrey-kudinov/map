@@ -13,12 +13,10 @@ const createTable = ({ rows, columns }) => {
   let currentRow = 0
 
   while (currentRow < rows) {
-    const row = new Array(columns).fill(0).map(cell => `<td style="width: ${size}rem; height: ${size}rem"></td>`)
+    const row = new Array(columns).fill(`<td style="width: ${size}rem; height: ${size}rem"></td>`)
     const rowHTML = document.createElement('tr')
     rowHTML.innerHTML = Array.from(row).join('')
-
     table.append(rowHTML)
-
     currentRow++
   }
 }
@@ -33,11 +31,10 @@ const createRandomColor = () => `#${Math.floor(Math.random() * 16777215).toStrin
 
 const createCircles = (colors, power) => {
   let currentCircle = 0
-
   const cells = document.querySelectorAll('td')
   const centerCell = cells[generateRandomInteger(rows) * generateRandomInteger(columns) - 1]
-
   const circles = document.querySelectorAll('.circle')
+
   if (circles?.length) circles.forEach(circle => circle.remove())
 
   while (currentCircle <= power) {
@@ -47,10 +44,9 @@ const createCircles = (colors, power) => {
     circle.style.width = dimension
     circle.style.height = dimension
     circle.style.background = colors[colors.length - 1 - currentCircle]
-    circle.style.zIndex = colors.length - currentCircle + 1
+    circle.style.zIndex = colors.length - currentCircle
 
     centerCell.append(circle)
-
     currentCircle++
   }
 }
