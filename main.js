@@ -60,10 +60,10 @@ const createColors = (defaultColors, power) => {
 
 const createRandomColor = () => `#${Math.floor(Math.random() * 16777215).toString(16)}`
 
-const createCircles = (colors, power) => {
+const createCircles = ({ colors, power, x, y }) => {
   let currentCircle = 0
   const cells = document.querySelectorAll('td')
-  const selectedCell = cells[((generateRandomInteger(rows) - 1) * columns) + generateRandomInteger(columns) - 1]
+  const selectedCell = cells[((y - 1) * columns) + x - 1]
   const circles = document.querySelectorAll('.circle')
 
   if (circles?.length) circles.forEach(circle => circle.remove())
@@ -87,7 +87,7 @@ const generateRandomInteger = max => Math.floor(Math.random() * max) + 1
 const setCircles = () => {
   const power = generateRandomInteger(maxPower)
   const colors = createColors(defaultColors, power)
-  createCircles(colors, power)
+  createCircles({ colors, power, x: generateRandomInteger(columns), y: generateRandomInteger(rows) })
 }
 
 window.addEventListener('DOMContentLoaded', () => {
