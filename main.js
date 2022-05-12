@@ -4,8 +4,39 @@ import './styles/style.scss'
 const rows = 200
 const columns = 200
 const size = 0.1
-const defaultColors = ['#49b600', '#c7dd00', 'yellow', '#ffd900', 'orange', '#d65600', '#df0000', 'darkred']
-const maxPower = 15
+const defaultColors = [
+  '#0068df',
+  '#007bdf',
+  '#0095df',
+  '#00a4df',
+  '#00badf',
+  '#00d4df',
+  '#00dfc1',
+  '#00dfab',
+  '#00df8a',
+  '#00df73',
+  '#00df55',
+  '#00df0f',
+  '#30df00',
+  '#7bdf00',
+  '#9cdf00',
+  '#b6df00',
+  '#d8df00',
+  '#dfd400',
+  '#dfb600',
+  '#dfa400',
+  '#df9800',
+  '#df8800',
+  '#df6800',
+  '#df4700',
+  '#df3b00',
+  '#df2100',
+  '#df0000',
+  '#c40000',
+  '#a60202',
+  'darkred'
+]
+const maxPower = 30
 
 const createTable = ({ rows, columns }) => {
   const table = document.querySelector('table')
