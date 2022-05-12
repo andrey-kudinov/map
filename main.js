@@ -63,7 +63,7 @@ const createRandomColor = () => `#${Math.floor(Math.random() * 16777215).toStrin
 const createCircles = (colors, power) => {
   let currentCircle = 0
   const cells = document.querySelectorAll('td')
-  const centerCell = cells[generateRandomInteger(rows) * generateRandomInteger(columns) - 1]
+  const selectedCell = cells[((generateRandomInteger(rows) - 1) * columns) + generateRandomInteger(columns) - 1]
   const circles = document.querySelectorAll('.circle')
 
   if (circles?.length) circles.forEach(circle => circle.remove())
@@ -77,7 +77,7 @@ const createCircles = (colors, power) => {
     circle.style.background = colors[colors.length - 1 - currentCircle]
     circle.style.zIndex = colors.length - currentCircle
 
-    centerCell.append(circle)
+    selectedCell.append(circle)
     currentCircle++
   }
 }
