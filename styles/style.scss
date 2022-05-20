@@ -19,6 +19,16 @@ body {
   background-color: #242121;
 }
 
+a {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: white;
+  padding: 1rem;
+  color: #242121;
+  border-radius: 0 0 0 .5rem;
+}
+
 .inputs {
   display: flex;
   flex-direction: column;
